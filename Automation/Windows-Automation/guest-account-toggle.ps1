@@ -17,7 +17,6 @@ function Set-GuestAdminMembership {
     )
 
     if ($AddToAdmins) {
-        Write-Host "Adding Guest to Administrators group..." -ForegroundColor Green
         try {
             net localgroup Administrators Guest /add
             Write-Host "Guest successfully added to Administrators." -ForegroundColor Green
@@ -25,7 +24,6 @@ function Set-GuestAdminMembership {
             Write-Host "Error adding Guest to Administrators: $_" -ForegroundColor Red
         }
     } else {
-        Write-Host "Removing Guest from Administrators group..." -ForegroundColor Yellow
         try {
             net localgroup Administrators Guest /delete
             Write-Host "Guest successfully removed from Administrators." -ForegroundColor Green
@@ -43,7 +41,6 @@ function Set-GuestAccountStatus {
     )
 
     if ($EnableAccount) {
-        Write-Host "Enabling Guest account..." -ForegroundColor Green
         try {
             net user Guest /active:yes
             Write-Host "Guest account enabled." -ForegroundColor Green
@@ -51,7 +48,6 @@ function Set-GuestAccountStatus {
             Write-Host "Error enabling Guest account: $_" -ForegroundColor Red
         }
     } else {
-        Write-Host "Disabling Guest account..." -ForegroundColor Yellow
         try {
             net user Guest /active:no
             Write-Host "Guest account disabled." -ForegroundColor Green
