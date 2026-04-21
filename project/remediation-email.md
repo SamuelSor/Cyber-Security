@@ -10,7 +10,6 @@ Based on our initial vulnerability scan and assessment, we have created a set of
 3. [**Windows OS Secure Configuration (RDP Network Level Authentication)**](https://github.com/SamuelSor/Cyber-Security/blob/main/Automation/Windows-Automation/RDP-NLA-toggle)
 4. [**Windows OS Secure Configuration (LAN Manager Authentication Level)**](https://github.com/SamuelSor/Cyber-Security/blob/main/Automation/Windows-Automation/LM-compatibility-toggle)
 5. [**Secure SMB Configuration**](https://github.com/SamuelSor/Cyber-Security/blob/main/Automation/Windows-Automation/SMB-signing-toggle.ps1)
-6. [**Windows OS Updates**]
 
 Let me know if you have any questions or need any adjustments!
 
