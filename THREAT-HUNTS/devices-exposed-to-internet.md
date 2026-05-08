@@ -23,6 +23,6 @@ Of all the remote IPs discovered to fail or attempt a login only one IP was succ
 
 <img width="560" height="114" alt="image" src="https://github.com/user-attachments/assets/c4c9e89f-688b-4051-8a90-fd4a9a432185" />
 
-After further investigation this successful login was confirmed to be from an authorized user.
+After further investigation this successful login was confirmed to be from an authorized user that successfully logged in 3 times.
 
 
