@@ -25,4 +25,7 @@ Of all the remote IPs discovered to fail or attempt a login only one IP was succ
 
 After further investigation this successful login was confirmed to be from an authorized user that successfully logged in 3 times.
 
+**Relevant MITRE ATT&CK TTPs:**  
 
+        T1078: Valid Accounts (successful logons by legitimate account "samtarget"  
+        T1110: Brute Force (failed logon attempts from multiple IP addresses)  
