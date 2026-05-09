@@ -1,4 +1,4 @@
-## THREAT HUNT: PIPd Employee Data Exfiltration
+## THREAT HUNT: PIP'd Employee Data Exfiltration
 
 An employee was recently placed on a performance improvement plan and reportedly threw a fit. Management placed a flag on him because they believe he may try to exfilitrate proprietary company data before quitting.
 Upon inspecting the DeviceFileEvents table, there was some suspicious activity coming from the employee's computer, under his account.
