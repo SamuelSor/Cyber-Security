@@ -28,7 +28,7 @@ Following the trail of compressed files, I took the timestamp of one of the susp
 
 <img width="1478" height="305" alt="Screenshot 2026-05-09 131719" src="https://github.com/user-attachments/assets/68cda588-e8b2-49d6-87ec-be7e67d24be4" />
 
-After finding that the data was being put into an archive, I wanted to check to see if the employee was exfiltrating this data beyond the network. I looked at the DeviceNetworkEvents table filtered events occuring around the same time as the initial file zip. I found that the same PowerShell script was again in use, but this time it was being used to connect to an unknown IP on the internet.
+After finding that the data was being put into an archive, I wanted to check to see if the employee was exfiltrating this data beyond the network. I looked at the DeviceNetworkEvents table filtered events occuring around the same time as the initial file zip. I found that the same PowerShell script was again in use, but this time it was being used to connect to an unknown IP on the internet. This is clear evidence that this employee did exfiltrate confidential employee information from the company's network.
 
     let specficTime = datetime(2026-05-09T16:15:58.2556091Z);  
     DeviceNetworkEvents  
@@ -38,6 +38,4 @@ After finding that the data was being put into an archive, I wanted to check to 
 
 <img width="1490" height="334" alt="Screenshot 2026-05-09 134137" src="https://github.com/user-attachments/assets/bedebb78-de0a-42a0-869f-dd5704c484db" />
 
-
-
-<img width="1257" height="298" alt="image" src="https://github.com/user-attachments/assets/84c8577a-2220-4ce8-bc33-d79d976d9ded" />
+*This information was relayed to the employee's manager, and the situation was escalated from there.*
