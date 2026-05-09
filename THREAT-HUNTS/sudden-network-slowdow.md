@@ -22,3 +22,21 @@ Further investigation of the failed connections, in chronological order, to the 
 
 Scans began on May 8, 2026 5:17:47 PM EST  
 
+I pivoted to the DeviceProcessEvent table to see if I could see anything that was suspicious around the time the port scan started. 
+I noticed a PowerShell script named portscan.ps1 launching at 2026-05-08T21:18:02.1769434Z.
+
+    let VM = "samtargetmachin";  
+    let specificTime = datetime(2026-05-08T21:18:13.4416262Z);  
+    DeviceProcessEvents  
+    |where Timestamp between ((specificTime - 10m) .. (specificTime + 10m))  
+    |where DeviceName == VM  
+    |order by Timestamp asc   
+    |project Timestamp, FileName, InitiatingProcessCommandLine  
+
+<img width="591" height="250" alt="Screenshot 2026-05-09 102221" src="https://github.com/user-attachments/assets/2ec066e2-7ea3-4646-bad9-a7ff1f6bba0c" />
+
+I logged into the suspected computer and observed the Powershell script that was used to conduct the port scan.
+
+<img width="1256" height="445" alt="image" src="https://github.com/user-attachments/assets/0b099ea2-900e-4c7c-a3a3-5ff99d32bbce" />
+
+
