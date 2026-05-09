@@ -1,4 +1,4 @@
-**THREAT HUNT: Devices exposed to the internet**
+## THREAT HUNT: Devices exposed to the internet
 
 *Device Name: samTargetMachine*
 
