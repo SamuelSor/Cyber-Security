@@ -39,4 +39,4 @@ I logged into the suspected computer and observed the Powershell script that was
 
 <img width="1256" height="445" alt="image" src="https://github.com/user-attachments/assets/0b099ea2-900e-4c7c-a3a3-5ff99d32bbce" />
 
-
+I observed the port scan script and found that it was launched by the local admin account, samtarget. This was not a planned event, so I isolated the device and ran a malware scan.
