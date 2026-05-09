@@ -39,3 +39,14 @@ After finding that the data was being put into an archive, I wanted to check to 
 <img width="1490" height="334" alt="Screenshot 2026-05-09 134137" src="https://github.com/user-attachments/assets/bedebb78-de0a-42a0-869f-dd5704c484db" />
 
 *This information was relayed to the employee's manager, and the situation was escalated from there.*
+
+
+**Relevant MITRE ATT&CK TTPs:**  
+
+    T1059.001: Command and Scripting Interpreter: PowerShell
+    T1071.001: Application Layer Protocol: Web Traffic
+    T1560.001: Achive Collected Data: Achive via Utility
+    T1105: Ingress Tool Tranfer
+    T1027: Obfuscated Files or Information
+    
+
