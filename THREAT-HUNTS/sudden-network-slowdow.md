@@ -48,4 +48,4 @@ I observed the port scan script and found that it was launched by the local admi
     TA0004: Priviledge Escalation
     T1049: System Network Connections Discovery
     
-
+*Continued remediation is required*
