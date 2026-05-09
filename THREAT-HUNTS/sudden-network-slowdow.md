@@ -1,4 +1,4 @@
-**THREAT HUNT: Suddent Network Slowdowns**
+## THREAT HUNT: Suddent Network Slowdowns
 
 samTargetMachine was found failing serveral connection request against itself and other host on the same network:
 
