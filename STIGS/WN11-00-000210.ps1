@@ -32,7 +32,7 @@ if (-not (Test-Path $RegistryPath)) {
     New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-# Set AllowBluetooth to Enabled (1)
+# Set AllowBluetooth to Disabled (0)
 New-ItemProperty `
     -Path $RegistryPath `
     -Name "AllowBluetooth" `
