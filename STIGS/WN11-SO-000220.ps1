@@ -26,18 +26,18 @@
 
 # Define the registry path and values
 # Create the registry path if it does not already exist
-$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services"
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0"
 
 if (-not (Test-Path $RegistryPath)) {
     New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-# Set fPromptForPassword to Enabled (1) STILL NEEDS TESTING
+# Set NtlmMinServerSec to Enabled (1) STILL NEEDS TESTING
 New-ItemProperty `
     -Path $RegistryPath `
-    -Name "fPromptForPassword" `
+    -Name "NtlmMinServerSec" `
     -PropertyType DWord `
-    -Value 1 `
+    -Value 537395200 `
     -Force | Out-Null
 
-Write-Host "fPromptForPassword has been set to 1." -ForegroundColor Green
+Write-Host "NtlmMinServerSec has been set to 1." -ForegroundColor Green
