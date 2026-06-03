@@ -7,11 +7,11 @@
     LinkedIn        : linkedin.com/in/SamuelSorto
     GitHub          : github.com/samuelsor
     Date Created    : 2026-06-03
-    Last Modified   : 2026-05-03
+    Last Modified   : 2026-06-03
     Version         : 1.0
     CVEs            : N/A
     Plugin IDs      : N/A
-    STIG-ID         : WN11-AU-000500
+    STIG-ID         : WN11-CC-000197
     Documentation   : https://stigaview.com/products/win11/v2r7/WN11-CC-000197/
 
 .TESTED ON
