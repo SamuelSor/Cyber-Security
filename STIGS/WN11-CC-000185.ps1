@@ -25,17 +25,20 @@
 #>
 
 # Define the registry path and values
-$registryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\
-$valueName = "NoAutorun"
-$valueData = 1
+# Create the registry path if it does not already exist
+$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
 
-if(-not (Test-Path $registryPath)) {
-    New-Item -Path $registryPath -Force | Out-Null
-
+if (-not (Test-Path $RegistryPath)) {
+    New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-#Set NoAutorun to value
-New-ItemProperty -Path $registryPath -Name $valueName -PropertyType DWord -Value $valueData -Force | Out-Null
+# Create or update the NoAutorun DWORD value and set it to 1
+New-ItemProperty `
+    -Path $RegistryPath `
+    -Name "NoAutorun" `
+    -PropertyType DWord `
+    -Value 1 `
+    -Force | Out-Null
 
-#Confirm completion
-Write-Host "Registry value '$valueName' set to '$valueData' at '$registryPath'"
+# Verify the setting
+Get-ItemProperty -Path $RegistryPath -Name "NoAutorun"
