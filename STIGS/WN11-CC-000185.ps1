@@ -32,7 +32,7 @@ if (-not (Test-Path $RegistryPath)) {
     New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-# Create or update the NoAutorun DWORD value and set it to 1
+# Set NoAutorun to Enabled (1)
 New-ItemProperty `
     -Path $RegistryPath `
     -Name "NoAutorun" `
@@ -40,5 +40,4 @@ New-ItemProperty `
     -Value 1 `
     -Force | Out-Null
 
-# Verify the setting
-Get-ItemProperty -Path $RegistryPath -Name "NoAutorun"
+Write-Host "NoAutorun has been set to 1." -ForegroundColor Green
