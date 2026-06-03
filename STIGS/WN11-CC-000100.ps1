@@ -26,18 +26,18 @@
 
 # Define the registry path and values
 # Create the registry path if it does not already exist
-$RegistryPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+$RegistryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers"
 
 if (-not (Test-Path $RegistryPath)) {
     New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-# Set NoAutorun to Enabled (1)
+# Set DisableWebPnPDownload to Enabled (1)
 New-ItemProperty `
     -Path $RegistryPath `
-    -Name "NoAutorun" `
+    -Name "DisableWebPnPDownload" `
     -PropertyType DWord `
     -Value 1 `
     -Force | Out-Null
 
-Write-Host "NoAutorun has been set to 1." -ForegroundColor Green
+Write-Host "DisableWebPnPDownload has been set to 1." -ForegroundColor Green
