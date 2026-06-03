@@ -34,7 +34,7 @@ if(-not (Test-Path $registryPath)) {
 
 }
 
-#Set DisableHTTPPrinting to value
+#Set DisableWindowsConsumerFeatures to value
 New-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -PropertyType DWord -Force
 
 #Confirm completion
