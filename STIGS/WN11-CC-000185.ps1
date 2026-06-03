@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script disables any printing with HTTP connections
+    This PowerShell script disables default autorun behavior to prevent any autorun commands
 
 .NOTES
     Author          : Samuel Sorto
