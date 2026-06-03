@@ -7,12 +7,12 @@
     LinkedIn        : linkedin.com/in/SamuelSorto
     GitHub          : github.com/samuelsor
     Date Created    : 2026-06-03
-    Last Modified   : 2026-05-03
+    Last Modified   : 2026-06-03
     Version         : 1.0
     CVEs            : N/A
     Plugin IDs      : N/A
-    STIG-ID         : WN11-AU-000500
-    Documentation   : https://stigaview.com/products/win11/v2r7/WN11-CC-000197/
+    STIG-ID         : WN11-CC-000185
+    Documentation   : https://stigaview.com/products/win11/v2r7/WN11-CC-000185/
 
 .TESTED ON
     Date(s) Tested  : 
@@ -34,8 +34,8 @@ if(-not (Test-Path $registryPath)) {
 
 }
 
-#Set DisableHTTPPrinting to value
-New-ItemProperty -Path $registryPath -Name $valueName -Value $valueData -PropertyType DWord -Force
+#Set NoAutorun to value
+New-ItemProperty -Path $registryPath -Name $valueName -PropertyType DWord -Value $valueData -Force | Out-Null
 
 #Confirm completion
 Write-Host "Registry value '$valueName' set to '$valueData' at '$registryPath'"
