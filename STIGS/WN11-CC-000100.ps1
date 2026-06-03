@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script disables any printing with HTTP connections
+    This PowerShell script prevents any print driver packages from being sent over HTTP
 
 .NOTES
     Author          : Samuel Sorto
