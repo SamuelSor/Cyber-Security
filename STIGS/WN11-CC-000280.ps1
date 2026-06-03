@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script disables any printing with HTTP connections
+    This PowerShell script changes Remote Desktop Services to always prompt a client for passwords upon connections
 
 .NOTES
     Author          : Samuel Sorto
