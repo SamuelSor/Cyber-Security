@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script disables any printing with HTTP connections
+    This PowerShell script strengthens the minimum session security requirement for NTLM SSP based servers
 
 .NOTES
     Author          : Samuel Sorto
@@ -32,7 +32,7 @@ if (-not (Test-Path $RegistryPath)) {
     New-Item -Path $RegistryPath -Force | Out-Null
 }
 
-# Set NtlmMinServerSec to Enabled (1) STILL NEEDS TESTING
+# Set NtlmMinServerSec to 537395200
 New-ItemProperty `
     -Path $RegistryPath `
     -Name "NtlmMinServerSec" `
@@ -40,4 +40,4 @@ New-ItemProperty `
     -Value 537395200 `
     -Force | Out-Null
 
-Write-Host "NtlmMinServerSec has been set to 1." -ForegroundColor Green
+Write-Host "NtlmMinServerSec has been set to 537395200." -ForegroundColor Green
