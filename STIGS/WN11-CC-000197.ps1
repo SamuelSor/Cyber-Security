@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This PowerShell script disables any printing with HTTP connections
+    This PowerShell script disables Microsoft consumer experience
 
 .NOTES
     Author          : Samuel Sorto
