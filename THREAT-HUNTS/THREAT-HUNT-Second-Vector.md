@@ -345,6 +345,24 @@ The attacker also downloaded files from SharePoint and accessed `yomark.pdf`, wh
 
 ---
 
+## MITRE ATT&CK Mapping
+
+| ATT&CK Tactic | Technique | MITRE ID | Evidence Correlation |
+|---------------|-----------|----------|----------------------|
+| Initial Access | Valid Accounts: Cloud Accounts | T1078.004 | Successful M365 sign-in |
+| Discovery | Account Discovery: Cloud Account | T1087.004 | `userRegistrationDetails` |
+| Discovery | Permission Groups Discovery: Cloud Groups | T1069.003 | `/me/memberOf` |
+| Collection | Email Collection | T1114 | Historical payment thread |
+| Collection | Data from Information Repositories | T1213 | Finance email reconnaissance |
+| Collection | Data from Cloud Storage | T1530 | SharePoint file access/downloads |
+| Collection | Automated Collection | T1119 | Power Automate workflow |
+| Exfiltration | Automated Exfiltration | T1020 | Graph-driven mail forwarding |
+| Persistence | Email Forwarding Rule | T1114.003 | `Backup Copy` inbox rule |
+| Defense Evasion | Hide Artifacts: Email Hiding Rules | T1564 | `Invoice Processing` archive rule |
+| Command and Control | Cloud Service | T1102 | Microsoft Graph API abuse |
+
+---
+
 ## Response Taken
 
 * Treated the incident as a confirmed identity compromise rather than a benign VPN login.
