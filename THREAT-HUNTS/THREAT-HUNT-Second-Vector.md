@@ -1,7 +1,7 @@
 <img width="1110" height="328" alt="Boarder" src="https://github.com/user-attachments/assets/2085561e-793d-4558-a01e-8beaf2fce474" />  
 
 # THREAT HUNT REPORT - Second Vector 📨
-
+### Report by: Samuel Sorto
 ## Platforms and Languages Leveraged
 
 * **Kusto Query Language (KQL)**
@@ -10,9 +10,9 @@
 
 ## Scenario
 
-`Timeframe: 2026-06-11 03:00 UTC → 2026-06-11 13:00 UTC`
-`Incident ID 87241: Anonymous IP address involving one user`
-`Company: LOG(N) Pacific`
+`Timeframe: 2026-06-11 03:00 UTC → 2026-06-11 13:00 UTC`  
+`Incident ID 87241: Anonymous IP address involving one user`  
+`Company: LOG(N) Pacific`  
 
 Microsoft Entra ID Protection raised an incident against a finance user's account overnight. The account was accessed by an anonymous IP address, flagged on the account `m.smith`, and rated **Low**. The rating may not be accurate and requires further investigation to verify the status of the account and determine whether the activity was benign or malicious.
 
@@ -167,19 +167,17 @@ EmailEvents
 | order by TimeGenerated asc
 ```
 
-**Screenshot Placeholder:**
+<img width="1027" height="345" alt="HistoricalEmail" src="https://github.com/user-attachments/assets/aca0b656-9436-4bcd-bc78-6fc41507600e" />
 
-> Insert screenshot showing the historical email thread with subject `Q1 Vendor Payment Schedule - Review Required`.
 
 ---
 
 ### 7. Identify a Second Service Used for the Fraud Request
 
-The attacker used `MicrosoftTeams` as another method of sending the payment update. This showed that the fraud attempt was not limited to email. The same request was pushed through a second Microsoft 365 service.
+The attacker used `MicrosoftTeams` as another method of sending the payment update. This showed that the fraud attempt was not limited to email. The same request was pushed through a second Microsoft 365 service.  
 
-**Screenshot Placeholder:**
+<img width="1033" height="72" alt="TeamsMessage" src="https://github.com/user-attachments/assets/1fafb34d-29a6-4e25-ae6e-ead253d86950" />  
 
-> Insert screenshot showing `OfficeActivity` with `Workload = MicrosoftTeams` and `Operation = MessageSent`.
 
 ---
 
@@ -217,10 +215,10 @@ OfficeActivity
 | where Operation == "New-InboxRule"
 | project TimeGenerated, Operation, Parameters
 ```
+<img width="575" height="318" alt="rule2" src="https://github.com/user-attachments/assets/9a99eae7-4f65-4c50-81a0-645225d2285b" />
 
-**Screenshot Placeholder:**
+<img width="575" height="318" alt="rule1" src="https://github.com/user-attachments/assets/25d8f01d-2727-44bb-bc7b-79c19cb01cb4" />
 
-> Insert screenshot showing both `New-InboxRule` events, including `Invoice Processing`, `Backup Copy`, `MoveToFolder = Archive`, and `ForwardTo = merovingian1337@proton.me`.
 
 ---
 
@@ -234,13 +232,12 @@ The attacker downloaded three items from SharePoint. This behavior was abnormal 
 OfficeActivity
 | where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
 | where UserId =~ "m.smith@lognpacific.org"
-| where Operation == "FileDownloaded" or Operation =="FileUploaded"
+| where Operation == "FileDownloaded"
 | project TimeGenerated, Operation, OfficeObjectId
 ```
 
-**Screenshot Placeholder:**
+<img width="1270" height="130" alt="FilesDownloaded" src="https://github.com/user-attachments/assets/27566f77-7931-4b56-9de7-24df0b3f9492" />
 
-> Insert screenshot showing the three `FileDownloaded` events.
 
 ---
 
@@ -265,9 +262,8 @@ OfficeActivity
 | project TimeGenerated, Operation, OfficeObjectId
 ```
 
-**Screenshot Placeholder:**
+<img width="1117" height="190" alt="FilesAccessed" src="https://github.com/user-attachments/assets/41f97121-35bd-4556-a897-c0ca231c9236" />
 
-> Insert screenshot showing `FileAccessed` activity for `yomark.pdf`.
 
 ---
 
@@ -284,16 +280,15 @@ SigninLogs
 | extend AD = todynamic(AuthenticationDetails)
 | where tostring(AD.authenticationStepResultDetail) has "MFA"
     or tostring(AD.authenticationMethod) has "MFA"
-| summarize count()
+| summarize NumberOfMFA = count()
 ```
 
-**Screenshot Placeholder:**
+<img width="156" height="70" alt="MFA" src="https://github.com/user-attachments/assets/308e00ed-f121-42b6-9628-efd9ea9a2c31" />
 
-> Insert screenshot showing MFA count of `0`.
 
 ---
 
-### 12. Investigate Microsoft Flow Portal Activity
+### 12. Investigate Microsoft Flow Portal Activity and Correlate Automated Forwarding with Microsoft Graph
 
 The attacker's session tried to blend in with normal applications, but one app stood out:
 
@@ -301,26 +296,7 @@ The attacker's session tried to blend in with normal applications, but one app s
 Microsoft Flow Portal
 ```
 
-This was most likely used to build automation into the attack. Flow Portal would not normally be expected for finance personnel and aligned with later automated forwarding behavior.
-
-**KQL:**
-
-```kql
-SigninLogs
-| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
-| where SessionId == "005d431a-380b-1f5e-e554-16d5010dc28e"
-| distinct AppDisplayName
-```
-
-**Screenshot Placeholder:**
-
-> Insert screenshot showing `Microsoft Flow Portal` in the list of applications accessed during the session.
-
----
-
-### 13. Correlate Automated Forwarding with Microsoft Graph
-
-The attacker forwarded details using an automated script. The `EmailEvents` table showed the forwarded email but did not provide the cause. Pivoting to `MicrosoftGraphActivityLogs` showed that the source IP for the forwarding action was:
+This was most likely used to build automation into the attack. Flow Portal would not normally be expected for finance personnel and aligned with later automated forwarding behavior.The attacker forwarded details using an automated script. The `EmailEvents` table showed the forwarded email but did not provide the cause. Pivoting to `MicrosoftGraphActivityLogs` showed that the source IP for the forwarding action was:
 
 ```text
 20.150.129.194
@@ -342,33 +318,18 @@ EmailEvents
 MicrosoftGraphActivityLogs
 | where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
 | where RequestUri has_any ("forward", "sendMail")
-| project TimeGenerated, IPAddress, RequestUri
+| project TimeGenerated, IPAddress, AppID, RequestUri
 | order by TimeGenerated asc
 ```
 
-**Screenshot Placeholder:**
+<img width="952" height="98" alt="FWEmails" src="https://github.com/user-attachments/assets/307a9b7a-1d88-4d9e-ba80-62baa384b526" />
 
-> Insert screenshot showing the forwarded email in `EmailEvents` and the related Graph API operation in `MicrosoftGraphActivityLogs`.
 
----
+The App ID (`7ab7862c-4c57-491e-8a45-d52a7e023983`) used to forward the mail is most commonly associated with Power Automate services. Because the attacker accessed `Microsoft Flow Portal`, the forwarding behavior was attributed to Microsoft Power Automate.
 
-### 14. Identify Power Automate as the Forwarding Service
 
-The App ID used to forward the mail is most commonly associated with Power Automate services. Because the attacker accessed `Microsoft Flow Portal`, the forwarding behavior was attributed to Microsoft Power Automate.
+<img width="1707" height="189" alt="GraphAPPID" src="https://github.com/user-attachments/assets/e11f6609-875b-49d9-a65c-40a4f74be3ec" />
 
-**KQL:**
-
-```kql
-MicrosoftGraphActivityLogs
-| where TimeGenerated between (datetime(2026-06-11 03:00:00) .. datetime(2026-06-11 13:00:00))
-| where RequestUri has_any ("forward", "sendMail")
-| project TimeGenerated, IPAddress, RequestUri, AppId
-| order by TimeGenerated asc
-```
-
-**Screenshot Placeholder:**
-
-> Insert screenshot showing Graph API forward/sendMail activity and the App ID associated with the forwarding service.
 
 ---
 
@@ -428,34 +389,3 @@ The attacker also downloaded files from SharePoint and accessed `yomark.pdf`, wh
 * Alert on finance users accessing Microsoft Flow Portal or creating new automation unexpectedly.
 * Alert on new inbox rules that move, delete, or forward mail from finance-related contacts.
 * Alert on Graph API `sendMail` or `forward` calls from unusual App IDs or service principals.
-
----
-
-## Flags
-
-| Flag Area                   | Finding                                        |
-| --------------------------- | ---------------------------------------------- |
-| Incident                    | `87241`                                        |
-| User                        | `m.smith@lognpacific.org`                      |
-| Attacker IP                 | `103.69.224.136`                               |
-| User-Agent OS               | Linux                                          |
-| Risk Event Type             | `anonymizedIPAddress`                          |
-| Majority Risk State         | `dismissed`                                    |
-| Account Status              | Enabled                                        |
-| Authentication Requirement  | `singleFactorAuthentication`                   |
-| Initial App                 | `One Outlook Web`                              |
-| Bad Password Attempts       | `2`                                            |
-| Distinct Apps Accessed      | `7`                                            |
-| Session ID                  | `005d431a-380b-1f5e-e554-16d5010dc28e`         |
-| Graph Auth Report Resource  | `userRegistrationDetails`                      |
-| Group Membership Path       | `/me/memberOf`                                 |
-| Historical Finance Thread   | `Q1 Vendor Payment Schedule - Review Required` |
-| Second Service Used         | `MicrosoftTeams`                               |
-| Hide Rule Name              | `Invoice Processing`                           |
-| Forwarding Rule Name        | `Backup Copy`                                  |
-| External Forward Address    | `merovingian1337@proton.me`                    |
-| File Exfiltration Operation | `FileDownloaded`                               |
-| Credential-                 |                                                |
-
-
-
